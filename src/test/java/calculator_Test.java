@@ -9,7 +9,7 @@ public class calculator_Test {
 
     @Test
     public void sqroot_true(){
-        assertEquals("Square root function check for, True positive result ",5.0,c.sqroot(49),delta);
+        assertEquals("Square root function check for, True positive result ",7.0,c.sqroot(49),delta);
         assertEquals("Square root function check for, True negative result ",Double.NaN,c.sqroot(-49),delta);
     }
     @Test
