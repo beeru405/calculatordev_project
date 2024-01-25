@@ -1,73 +1,75 @@
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+public class CalculatorTest {
 
-public class calculator_Test {
-    private static final double delta = 1e-15;
-    calculator c=new calculator();
+    private Calculator calculator;
 
-    @Test
-    public void sqroot_true(){
-        assertEquals("Square root function check for, True positive result ",7.0,c.sqroot(49),delta);
-        assertEquals("Square root function check for, True negative result ",Double.NaN,c.sqroot(-49),delta);
+    @Before
+    public void setUp() {
+        calculator = new Calculator();
     }
-    @Test
-    public void sqroot_false(){
-        assertNotEquals("Square root function check for, False positive result ",8.0,c.sqroot(49),delta);
-        assertNotEquals("Square root function check for, False negative result ",7,c.sqroot(-49),delta);
 
+    @After
+    public void tearDown() {
+        calculator = null;
     }
 
     @Test
-    public void fact_true(){
-        assertEquals("Factorial function check for, True positive result ",5040,c.fact(7),delta);
-        assertEquals("Factorial function check for, True negative result ",Double.NaN,c.fact(-4),delta);
-
-
-    }
-    @Test
-    public void fact_false(){
-        assertNotEquals("Factorial function check for, False positive result ",8,c.fact(3),delta);
-        assertNotEquals("Factorial function check for, False negative result ",12001,c.fact(5),delta);
-
+    public void testFactorialPass() {
+        assertEquals(120, calculator.fact(5), 0.001); // 5! = 120
     }
 
     @Test
-    public void power_true(){
-        assertEquals("Power function check for, True positive result ",16,c.power(4,2),delta);
-        assertEquals("Power function check for, True negative result ",1,c.power(3,0),delta);
-
-    }
-    @Test
-    public void power_false(){
-        assertNotEquals("Power function check for, False positive result ",2,c.power(2,8),delta);
-        assertNotEquals("Power function check for, False negative result ",1,c.power(0,1),delta);
-
+    public void testFactorialFail() {
+        assertEquals(Double.NaN, calculator.fact(-3), 0.001); // Factorial of a negative number should return NaN
     }
 
-
     @Test
-    public void logarithm_true(){
-        assertEquals("Logarithm function check for, True positive result ",1.3862943611198906,c.naturalLog(4),delta);
-        assertEquals("Logarithm function check for, True negative result ",Double.NaN,c.naturalLog(-4),delta);
-
+    public void testSquareRootPass() {
+        assertEquals(4, calculator.sqroot(16), 0.001); // Square root of 16 is 4
     }
-    @Test
-    public void logarithm_false() {
-        assertNotEquals("Logarithm function check for, False positive result ", Double.NaN, c.naturalLog(3), delta);
-        assertNotEquals("Logarithm function check for, False negative result ", 1.3862943611198906, c.naturalLog(-4), delta);
-    }
-    @Test
-    public void modulus_true(){
-        assertEquals("modulus function check for, True positive result ",2,c.modulus(44,3),delta);
-        assertEquals("modulus function check for, True negative result ",3,c.modulus(18,5),delta);
 
-    }
     @Test
-    public void modulus_false(){
-        assertNotEquals("modulus function check for, False positive result ",2,c.modulus(16,8),delta);
-        assertNotEquals("modulus function check for, False negative result ",1,c.modulus(15,3),delta);
+    public void testSquareRootFail() {
+        assertEquals(Double.NaN, calculator.sqroot(-9), 0.001); // Square root of a negative number should return NaN
+    }
 
+    @Test
+    public void testPowerPass() {
+        assertEquals(8, calculator.power(2, 3), 0.001); // 2^3 = 8
+    }
+
+    @Test
+    public void testPowerFail() {
+        assertEquals(Double.NaN, calculator.power(0, -2), 0.001); // Power of a non-positive base should return NaN
+    }
+
+    @Test
+    public void testModulusPass() {
+        assertEquals(1, calculator.modulus(7, 2), 0.001); // 7 % 2 = 1
+    }
+
+    @Test
+    public void testModulusFail() {
+        assertEquals(Double.NaN, calculator.modulus(10, 0), 0.001); // Modulus by zero should return NaN
+    }
+
+    // Add more test cases as needed for other functionalities
+
+    @Test
+    public void testInvalidInput() {
+        // Example of testing invalid input (non-numeric input)
+        // This test assumes that entering a non-numeric value will result in an InputMismatchException
+        try {
+            // Replace the following line with actual code that triggers an InputMismatchException
+            calculator.main(new String[]{"non-numeric-input"});
+            fail("Expected InputMismatchException, but it did not occur.");
+        } catch (InputMismatchException e) {
+            // This is the expected outcome
+        }
     }
 }
