@@ -10,6 +10,7 @@ pipeline {
             steps {
                 script {
                     // Use Gradle Wrapper to assemble the debug APK
+                    sh 'gradle init'
                     sh '${GRADLE_HOME}/gradlew assembleDebug'
                 }
             }
