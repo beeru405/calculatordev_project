@@ -1,38 +1,26 @@
 pipeline {
     agent any
 
-    environment {
-        ANDROID_HOME = '/home/idrbt/Android/Sdk'
-        PATH = "${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                // Check out the code from your public GitHub repository
+                git 'https://github.com/beeru405/calculatordev_project.git'
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    sh './gradlew assembleDebug'
-                }
+                // Use Maven to build the project
+                sh 'mvn clean install'
             }
         }
 
-        stage('Archive APK') {
+        stage('Test') {
             steps {
-                script {
-                    archiveArtifacts artifacts: 'app/build/outputs/**/*.apk', fingerprint: true
-                }
+                // Run Maven test phase
+                sh 'mvn test'
             }
-        }
-    }
-
-    post {
-        always {
-            cleanWs()
         }
     }
 }
