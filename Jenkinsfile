@@ -2,31 +2,17 @@ pipeline {
     agent any
 
     environment {
-        ANDROID_HOME = '/home/idrbt/Android/Sdk'
+        GRADLE_HOME = '/home/idrbt/Android/Sdk/bin/'
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Build APK') {
+        stage('Build') {
             steps {
                 script {
-                    def androidHome = tool 'Android_SDK'
-                    sh "${androidHome}/bin/./gradlew assembleDebug"
+                    // Use Gradle Wrapper to assemble the debug APK
+                    sh '${GRADLE_HOME}/gradlew assembleDebug'
                 }
-            }
-        }
-
-        stage('Publish APK') {
-            steps {
-                archiveArtifacts '**/*.apk'
             }
         }
     }
 }
-
-
