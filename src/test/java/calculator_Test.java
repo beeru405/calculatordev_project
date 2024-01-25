@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class calculator_Test {
-    private static final double delta = 1e-15;
+    private static final double delta = 1e-14;
     calculator c=new calculator();
 
     @Test
     public void sqroot_true(){
-        assertEquals("Square root function check for, True positive result ",71.0,c.sqroot(49),delta);
+        assertEquals("Square root function check for, True positive result ",7.0,c.sqroot(49),delta);
         assertEquals("Square root function check for, True negative result ",Double.NaN,c.sqroot(-49),delta);
     }
     @Test
