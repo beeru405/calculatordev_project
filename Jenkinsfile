@@ -14,11 +14,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                script {
-                    def mvnHome = tool 'Maven'
-                    sh "${mvnHome}/bin/mvn clean install"
+                sh 'mvn clean install'
                 }
-            }
         }
 
         stage('Build Docker Image') {
