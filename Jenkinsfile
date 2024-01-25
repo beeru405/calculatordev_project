@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'calc-app'
+        ANDROID_HOME = '/home/idrbt/Android/Sdk'
     }
 
     stages {
@@ -12,29 +12,21 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sh 'mvn clean install'
-                }
-        }
-
-        stage('Build Docker Image') {
+        stage('Build APK') {
             steps {
                 script {
-                    docker.build(DOCKER_IMAGE, "--file=Dockerfile .")
+                    def androidHome = tool 'Android_SDK'
+                    sh "${androidHome}/bin/./gradlew assembleDebug"
                 }
             }
         }
 
-        stage('Deploy to Docker') {
+        stage('Publish APK') {
             steps {
-                script {
-                    docker.withRegistry('https://your-docker-registry', 'docker-registry-credentials') {
-                        docker.image(DOCKER_IMAGE).push()
-                    }
-                }
+                archiveArtifacts '**/*.apk'
             }
         }
     }
 }
+
 
