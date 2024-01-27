@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-               docker.build basic-calc
+               docker.build(basic-calc, "--file=Dokcerfile.")
             }
         }
     }
