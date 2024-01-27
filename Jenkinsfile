@@ -3,8 +3,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'calc-app'
-        registry = "797268/calculator"
-        registryCredential = '797268'
     }
 
     stages {
@@ -32,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Log in to Docker Hub
-                    docker.withRegistry('https://registry.hub.docker.com', 'registryCredential') {
+                    withDockerRegistry([ credentialsId: "797268", url: "" ]) {
                         // Push Docker image to Docker Hub
                         docker.image("${DOCKER_IMAGE}:${TAG}").push()
                     }
