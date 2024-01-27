@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'calc-app'
+        DOCKER_HUB_REPO = "797268/calculator"
     }
 
     stages {
