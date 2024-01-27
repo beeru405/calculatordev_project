@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy to Docker') {
             steps {
                 script {
-                    docker.withRegistry('https://797268', 'docker-registry-credentials') {
+                    docker.withRegistry('https://your-docker-registry', 'docker-registry-credentials') {
                         docker.image(DOCKER_IMAGE).push()
                     }
                 }
