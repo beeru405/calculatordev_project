@@ -20,10 +20,6 @@ pipeline {
                // Copy the JAR file to Tomcat webapps directory
                 sh 'cp /var/lib/jenkins/workspace/basic-calc/target/Calculator-1.0-SNAPSHOT.jar /opt/apache-tomcat-9.0.85/webapps'
                 //sh "echo $idrbt | sudo -S cp target/Calculator-1.0-SNAPSHOT.jar /opt/apache-tomcat-9.0.85/webapps/"
-
-                // Restart Tomcat (replace with your Tomcat restart command)
-                sh '/opt/apache-tomcat-9.0.85/bin/shutdown.sh'
-                sh '/opt/apache-tomcat-9.0.85/startup.sh'
             }
         }
     }
