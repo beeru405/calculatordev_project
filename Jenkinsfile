@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy') {
             steps {
                // Copy the JAR file to Tomcat webapps directory
-                sh 'cp target/Calculator-1.0-SNAPSHOT.jar /opt/apache-tomcat-9.0.85/webapps/'
+                sh 'cp /var/lib/jenkins/workspace/basic-calc/target/Calculator-1.0-SNAPSHOT.jar /opt/apache-tomcat-9.0.85/webapps/'
                 //sh "echo $idrbt | sudo -S cp target/Calculator-1.0-SNAPSHOT.jar /opt/apache-tomcat-9.0.85/webapps/"
 
                 // Restart Tomcat (replace with your Tomcat restart command)
