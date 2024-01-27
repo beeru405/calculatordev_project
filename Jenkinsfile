@@ -15,5 +15,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Deploy') {
+            steps {
+                // Run Maven test phase
+                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://192.168.138.130:8090/')], contextPath: null, war: '**/*.jar'
+            }
+        }
     }
 }
