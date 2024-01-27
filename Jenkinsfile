@@ -15,10 +15,5 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Deploy') {
-            steps {
-               docker.build(basic-calc, "--file=Dokcerfile.")
-            }
-        }
     }
 }
