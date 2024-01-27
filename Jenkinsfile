@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'basic-calc'
         DOCKER_HUB_USERNAME = credentials('797268')
         DOCKER_HUB_PASSWORD = credentials('Dockerhub@405')
         DOCKER_IMAGE_NAME = '797268/basic-calculator'
