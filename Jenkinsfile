@@ -2,10 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_USERNAME = credentials('797268')
-        DOCKER_HUB_PASSWORD = credentials('Dockerhub@405')
-        DOCKER_IMAGE_NAME = '797268/basic-calculator'
-        TAG = 'latest'
+        DOCKER_IMAGE = 'calc-app'
     }
 
     stages {
@@ -35,7 +32,7 @@ pipeline {
                     // Log in to Docker Hub
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         // Push Docker image to Docker Hub
-                        docker.image("${DOCKER_IMAGE_NAME}:${TAG}").push()
+                        docker.image("${DOCKER_IMAGE}:${TAG}").push()
                     }
                 }
             }
