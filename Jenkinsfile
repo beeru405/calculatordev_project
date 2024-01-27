@@ -17,8 +17,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Run Maven test phase
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://192.168.138.130:8090/')], contextPath: null, war: '**/*.jar'
+               // Copy the WAR file to Tomcat webapps directory
+                sh 'cp target/your-web-project.war /opt/apache-tomcat-9.0.85/webapps/'
+
+                // Restart Tomcat (replace with your Tomcat restart command)
+                sh '/opt/apache-tomcat-9.0.85/bin/shutdown.sh'
+                sh '/opt/apache-tomcat-9.0.85/startup.sh'
             }
         }
     }
